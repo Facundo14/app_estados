@@ -1,26 +1,39 @@
+import 'package:app_estados/controllers/usuario_controller.dart';
+import 'package:app_estados/models/usuario.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Pagina1Page extends StatelessWidget {
   const Pagina1Page({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final usuarioCtrl = Get.put(UsuarioController());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pagina 1'),
       ),
-      body: const InformacionUsuario(),
+      body: Obx(
+        () => usuarioCtrl.existeUsuario.value
+            ? InformacionUsuario(usuario: usuarioCtrl.usuario.value)
+            : const Center(
+                child: CircularProgressIndicator(),
+              ),
+      ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.accessibility_sharp),
-        onPressed: () => Navigator.pushNamed(context, 'pagina2'),
+        onPressed: () => Get.toNamed('pagina2'),
       ),
     );
   }
 }
 
 class InformacionUsuario extends StatelessWidget {
+  final Usuario usuario;
+
   const InformacionUsuario({
     Key? key,
+    required this.usuario,
   }) : super(key: key);
 
   @override
@@ -36,13 +49,15 @@ class InformacionUsuario extends StatelessWidget {
           children: [
             Text('General', style: TextStyle(fontSize: size.width * 0.05, fontWeight: FontWeight.bold)),
             const Divider(),
-            const ListTile(title: Text('Nombre')),
-            const ListTile(title: Text('Edad')),
+            ListTile(title: Text('Nombre : ${usuario.nombre}')),
+            ListTile(title: Text('Edad : ${usuario.edad}')),
             Text('Profesiones', style: TextStyle(fontSize: size.width * 0.05, fontWeight: FontWeight.bold)),
             const Divider(),
-            const ListTile(title: Text('Profesion 1')),
-            const ListTile(title: Text('Profesion 1')),
-            const ListTile(title: Text('Profesion 1')),
+            ...usuario.profesiones.map((e) => ListTile(
+                  title: Text(e),
+                ))
+
+            //const ListTile(title: Text('Profesion 1')),
           ],
         ),
       ),
