@@ -10,6 +10,7 @@ class UsuarioBloc extends Bloc<UsuarioEvent, UsuarioState> {
   UsuarioBloc() : super(UsuarioState()) {
     on<OnEsablecerUsuario>(_onEstablecerUsuario);
     on<OnEstablecerEdad>(_onEstablecerEdad);
+    //on<OnEstablecerProfesion(_onEstablecerProfesion);
   }
 
   void _onEstablecerUsuario(OnEsablecerUsuario event, Emitter<UsuarioState> emit) {
@@ -26,6 +27,14 @@ class UsuarioBloc extends Bloc<UsuarioEvent, UsuarioState> {
       usuario: state.usuario.copyWith(
         edad: event.edad,
       ),
+    ));
+  }
+
+   void _onEstablecerProfesion(OnEstablecerProfesion event, Emitter<UsuarioState> emit) {
+    emit(state.copyWith(
+      // usuario: state.usuario.copyWith(
+      //   profesiones: 
+      // ),
     ));
   }
 }

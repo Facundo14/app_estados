@@ -14,3 +14,9 @@ class OnEstablecerEdad extends UsuarioEvent {
 
   OnEstablecerEdad(this.edad);
 }
+
+class OnEstablecerProfesion extends UsuarioEvent {
+  final String profesion;
+
+  OnEstablecerProfesion(this.profesion);
+}
