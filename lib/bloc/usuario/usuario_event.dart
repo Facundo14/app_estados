@@ -20,3 +20,7 @@ class OnEstablecerProfesion extends UsuarioEvent {
 
   OnEstablecerProfesion(this.profesion);
 }
+
+class OnBorrarUsuario extends UsuarioEvent {
+  OnBorrarUsuario();
+}

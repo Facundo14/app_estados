@@ -8,9 +8,8 @@ class UsuarioState {
   final bool existeUsuario;
   final Usuario usuario;
 
-  UsuarioState({this.nombre = '', this.edad = 0, profesiones, usuario, existeUsuario})
+  UsuarioState({this.nombre = '', this.edad = 0, profesiones, usuario, this.existeUsuario = false})
       : usuario = usuario ?? Usuario(),
-        existeUsuario = (usuario != null) ? true : false,
         profesiones = profesiones ?? [];
 
   UsuarioState copyWith({
@@ -27,7 +26,10 @@ class UsuarioState {
           existeUsuario: existeUsuario ?? this.existeUsuario,
           usuario: usuario ?? this.usuario);
 
-  UsuarioState initState() => UsuarioState();
+  UsuarioState initState() => UsuarioState(
+        existeUsuario: false,
+        usuario: null,
+      );
 }
 
 class UsuarioInitial extends UsuarioState {}
